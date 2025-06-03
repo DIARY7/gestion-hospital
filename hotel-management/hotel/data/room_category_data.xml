@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="room_category_standard" model="hotel.room.category">
+            <field name="name">standard</field>
+            <field name="quality_level">1.0</field>
+        </record>
+
+        <record id="room_category_executive" model="hotel.room.category">
+            <field name="name">executive</field>
+            <field name="quality_level">2.0</field>
+        </record>
+
+        <record id="room_category_deluxe" model="hotel.room.category">
+            <field name="name">deluxe</field>
+            <field name="quality_level">3.0</field>
+        </record>
+
+    </data>
+</odoo>

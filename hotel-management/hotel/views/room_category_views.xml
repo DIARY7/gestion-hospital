@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vue liste -->
+    <record id="view_hotel_room_category_list" model="ir.ui.view">
+        <field name="name">hotel.room.category.list</field>
+        <field name="model">hotel.room.category</field>
+        <field name="arch" type="xml">
+            <list string="Room Categories">
+                <field name="name"/>
+                <field name="quality_level"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue formulaire -->
+    <record id="view_hotel_room_category_form" model="ir.ui.view">
+        <field name="name">hotel.room.category.form</field>
+        <field name="model">hotel.room.category</field>
+        <field name="arch" type="xml">
+            <form string="Room Category">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="quality_level"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hotel_room_category" model="ir.actions.act_window">
+        <field name="name">Room Categories</field>
+        <field name="res_model">hotel.room.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the different categories of rooms offered by your hotel.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_hotel_root" name="Hotel" sequence="10"/>
+    <menuitem id="menu_hotel_room_category" name="Room Categories" parent="menu_hotel_root" action="action_hotel_room_category" sequence="20"/>
+</odoo>

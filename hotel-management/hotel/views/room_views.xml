@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Vue liste -->
+    <record id="view_hotel_room_list" model="ir.ui.view">
+        <field name="name">hotel.room.list</field>
+        <field name="model">hotel.room</field>
+        <field name="arch" type="xml">
+            <list string="Hotel Rooms">
+                <field name="name"/>
+                <field name="room_category_id"/>
+                <field name="max_capacity"/>
+                <field name="base_price"/>
+                <field name="total_price"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue formulaire -->
+    <record id="view_hotel_room_form" model="ir.ui.view">
+        <field name="name">hotel.room.form</field>
+        <field name="model">hotel.room</field>
+        <field name="arch" type="xml">
+            <form string="Hotel Room">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="room_category_id"/>
+                        <field name="max_capacity"/>
+                        <field name="equipment_ids" widget="many2many_tags"/>
+                        <field name="base_price"/>
+                        <field name="total_price" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour la vue -->
+    <record id="action_hotel_room" model="ir.actions.act_window">
+        <field name="name">Hotel Rooms</field>
+        <field name="res_model">hotel.room</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a room to manage the hotel's availability and price.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu (rattaché à 'Hotel' ou créé si nécessaire) -->
+    <menuitem id="menu_hotel_root" name="Hotel" sequence="10"/>
+    <menuitem id="menu_hotel_room" name="Rooms" parent="menu_hotel_root" action="action_hotel_room" sequence="30"/>
+
+</odoo>

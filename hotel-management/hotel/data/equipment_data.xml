@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="equipment_tv_4k" model="hotel.equipment">
+            <field name="name">4K UHD TV</field>
+            <field name="price">450.00</field>
+        </record>
+
+        <record id="equipment_minibar" model="hotel.equipment">
+            <field name="name">Minibar</field>
+            <field name="price">300.00</field>
+        </record>
+
+        <record id="equipment_safe" model="hotel.equipment">
+            <field name="name">Safe</field>
+            <field name="price">150.00</field>
+        </record>
+
+        <record id="equipment_air_conditioner" model="hotel.equipment">
+            <field name="name">Air Conditioner</field>
+            <field name="price">600.00</field>
+        </record>
+
+        <record id="equipment_wifi_router" model="hotel.equipment">
+            <field name="name">Wi-Fi Router</field>
+            <field name="price">100.00</field>
+        </record>
+
+    </data>
+</odoo>
