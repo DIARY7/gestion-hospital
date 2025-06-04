@@ -10,9 +10,9 @@ class Room(models.Model):
     max_capacity = fields.Integer(string='Max capacity',required=True)
     equipment_ids = fields.Many2many('hotel.equipment', string='Equipments')  # Equipment default
     base_price = fields.Float(string='Price',required=True)
-    total_price = fields.Float(string='Total Price',compute='_total_price')
+    total_price = fields.Float(string='Total Price',compute='_compute_total_price') # one night
 
-    @api.depends('equipment_ids','room_category_id' )
+    @api.depends('equipment_ids','room_category_id','base_price' )
     def _compute_total_price(self):
         for room in self:
             price_equipments = sum(room.equipment_ids.mapped('price'))
