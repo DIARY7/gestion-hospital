@@ -1,24 +1,46 @@
 <odoo>
     <data>
-<!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
-        </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
-            </t>
-          </dl>
-        </template>
--->
+        <template id="main_layout" name="Simple Layout">
+            <html>
+              <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <title>Hotel</title>
+                <!-- Bootstrap 5 CSS depuis CDN -->
+                <link href="/hotel/static/src/css/bootstrap.min.css" rel="stylesheet"/>
+              </head>
+              <body class="bg-light">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                  <div class="container">
+                    <a class="navbar-brand" href="/">Hôtel</a>
+                    <div class="collapse navbar-collapse">
+                      <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                          <a class="nav-link" href="/my/hotel/reservations">My Reservations</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/my/hotel/book">Réserver</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+                <main class="container py-5">
+                  <t t-raw="0"/> <!-- Le contenu spécifique à chaque page -->
+                </main>
+
+                <footer class="bg-primary text-white text-center py-3 mt-auto">
+                  © <span id="year"></span> Hôtel. Tous droits réservés.
+                </footer>
+
+                <script>
+                  document.getElementById('year').textContent = new Date().getFullYear();
+                </script>
+                <!-- Bootstrap JS + Popper (optionnel) -->
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+                <script src="/hotel/static/src/js/bootstrap.min.js"></script>
+              </body>
+            </html>
+          </template>
     </data>
 </odoo>

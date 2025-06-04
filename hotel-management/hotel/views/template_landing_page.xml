@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <template id="landing_page" name="Hotel Landing Page">
+    <t t-call="hotel.main_layout">
+      <div id="wrap" class="container mt-5">
+
+        <!-- Contenu de la landing page -->
+        <div class="text-center">
+          <h1 class="display-4 mb-4">Bienvenue sur notre portail Hôtel</h1>
+          <p class="lead">Gérez vos réservations, réservez votre séjour et profitez de nos services haut de gamme.</p>
+          <img src="/hotel/static/src/img/hotel-landing.jpg" class="img-fluid rounded mt-4" style="max-height: 400px;" />
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>

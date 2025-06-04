@@ -24,10 +24,15 @@ Long description of module's purpose
         'views/room_category_views.xml',
         'views/room_views.xml',
         'views/room_reservation_views.xml',
+        'views/templates.xml',
+        'views/template_landing_page.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
         #'demo/demo.xml',
     ],
+
+    'installable': True,
+    'application': True,
 }
 

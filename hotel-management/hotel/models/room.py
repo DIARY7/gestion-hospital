@@ -17,6 +17,3 @@ class Room(models.Model):
         for room in self:
             price_equipments = sum(room.equipment_ids.mapped('price'))
             room.total_price = (room.base_price * room.room_category_id.quality_level) + price_equipments
-
-    def is_reserved(self):
-        print('is_reserved')

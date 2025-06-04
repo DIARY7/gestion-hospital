@@ -13,8 +13,11 @@ class RoomReservation(models.Model):
     equipment_add_ids = fields.Many2many('hotel.equipment', string='Equipments additional') # Equipment add plus add
     total_price = fields.Float(string='Total Price',readonly=True,compute='_compute_total_price')
 
-    @api.depends('room_id','equipment_ids')
+    @api.depends('room_id','equipment_add_ids')
     def _compute_total_price(self):
         for reservation in self:
             reservation.total_price = reservation.room_id.total_price + sum(reservation.equipment_add_ids.mapped('total_price'))
 
+
+    def is_reserved(self,room_id,start_date,end_date): # start_date and end_date of demand
+        print('is_reserved')
