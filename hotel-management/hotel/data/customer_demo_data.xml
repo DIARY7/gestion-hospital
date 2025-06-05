@@ -6,13 +6,13 @@
         <record id="demo_customer_partner_1" model="res.partner">
             <field name="name">Bob Dupont</field>
             <field name="email">bob.dupont@example.com</field>
-            <field name="customer_rank">1</field>
         </record>
 
         <record id="demo_customer_user_1" model="res.users">
             <field name="name">Bob Dupont</field>
             <field name="login">bob.dupont@example.com</field>
             <field name="email">bob.dupont@example.com</field>
+            <field name="password">hotel123</field>
             <field name="partner_id" ref="demo_customer_partner_1"/>
             <field name="groups_id" eval="[(6, 0, [ref('base.group_portal')])]"/>
         </record>
@@ -21,13 +21,13 @@
         <record id="demo_customer_partner_2" model="res.partner">
             <field name="name">Alice Martin</field>
             <field name="email">alice.martin@example.com</field>
-            <field name="customer_rank">1</field>
         </record>
 
         <record id="demo_customer_user_2" model="res.users">
             <field name="name">Alice Martin</field>
             <field name="login">alice.martin@example.com</field>
             <field name="email">alice.martin@example.com</field>
+            <field name="password">hotel123</field>
             <field name="partner_id" ref="demo_customer_partner_2"/>
             <field name="groups_id" eval="[(6, 0, [ref('base.group_portal')])]"/>
         </record>
@@ -36,13 +36,13 @@
         <record id="demo_customer_partner_3" model="res.partner">
             <field name="name">Karim Boulahya</field>
             <field name="email">karim.boulahya@example.com</field>
-            <field name="customer_rank">1</field>
         </record>
 
         <record id="demo_customer_user_3" model="res.users">
             <field name="name">Karim Boulahya</field>
             <field name="login">karim.boulahya@example.com</field>
             <field name="email">karim.boulahya@example.com</field>
+            <field name="password">hotel123</field>
             <field name="partner_id" ref="demo_customer_partner_3"/>
             <field name="groups_id" eval="[(6, 0, [ref('base.group_portal')])]"/>
         </record>

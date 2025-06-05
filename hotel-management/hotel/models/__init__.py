@@ -4,4 +4,4 @@ from . import customer
 from . import equipment
 from . import room
 from . import room_category
-from . import room_reservation
+from . import room_booking

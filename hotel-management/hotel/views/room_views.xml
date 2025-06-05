@@ -10,7 +10,6 @@
                 <field name="name"/>
                 <field name="room_category_id"/>
                 <field name="max_capacity"/>
-                <field name="base_price"/>
                 <field name="total_price"/>
             </list>
         </field>
@@ -28,7 +27,6 @@
                         <field name="room_category_id"/>
                         <field name="max_capacity"/>
                         <field name="equipment_ids" widget="many2many_tags"/>
-                        <field name="base_price"/>
                         <field name="total_price" readonly="1"/>
                     </group>
                 </sheet>

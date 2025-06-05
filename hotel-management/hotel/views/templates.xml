@@ -1,24 +1,77 @@
 <odoo>
     <data>
-<!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
-        </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
-            </t>
-          </dl>
-        </template>
--->
+        <template id="main_layout" name="Simple Layout">
+            <html>
+              <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <title>Hotel</title>
+                <!-- Bootstrap 5 CSS depuis CDN -->
+                <link href="/hotel/static/src/css/bootstrap.min.css" rel="stylesheet"/>
+                <link href="/hotel/static/src/css/template.css" rel="stylesheet" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+              </head>
+              <body class="bg-light">
+                <nav class="navbar navbar-expand-lg navbar-dark">
+                    <div class="container">
+                        <a class="navbar-brand" href="/">E-DASY</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/my/hotel/reservations">Mes Réservations</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/book/form">Réserver</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/web/session/logout?redirect=/">Deconnecter</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <main>
+                  <t t-raw="0"/> <!-- Le contenu spécifique à chaque page -->
+                </main>
+
+                <footer class="text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <h5>E-DASY</h5>
+                                <p>Votre destination pour un séjour confortable.</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <h6>Liens Rapides</h6>
+                                <div class="d-flex flex-column">
+                                    <a href="/my/hotel/reservations" class="footer-link">Mes Réservations</a>
+                                    <a href="/my/hotel/book" class="footer-link">Réserver</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <h6>Contact</h6>
+                                <p class="mb-1">📍 123 Rue de l'Hôtel, Anosivavaka</p>
+                                <p class="mb-1">📞 +33 1 23 45 67 89</p>
+                            </div>
+                        </div>
+                        <hr class="my-4" style="border-color: var(--accent-color);" />
+                        <p class="mb-0">© <span id="year"></span> Hôtel. Tous droits réservés.</p>
+                    </div>
+                </footer>
+
+                <script>
+                  document.getElementById('year').textContent = new Date().getFullYear();
+                </script>
+
+                <!-- Bootstrap JS + Popper (optionnel) -->
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+                <script src="/hotel/static/src/js/bootstrap.min.js"></script>
+              </body>
+            </html>
+          </template>
     </data>
 </odoo>

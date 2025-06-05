@@ -1,0 +1,390 @@
+:root {
+    --primary-color: #3c2a21; /* Marron foncé */
+    --secondary-color: #1a120b; /* Marron très foncé / presque noir */
+    --accent-color: #d5cea3; /* Beige/marron clair pour accent */
+    --text-light: #e5e5cb; /* Beige très clair pour texte sur fond foncé */
+    --text-dark: #1a120b; /* Marron très foncé pour texte */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+}
+
+.navbar {
+    background-color: var(--secondary-color) !important;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: var(--text-light) !important;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-warning {
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    color: var(--text-dark) !important;
+}
+
+.hero-section {
+    background: linear-gradient(rgba(26, 18, 11, 0.7), rgba(60, 42, 33, 0)),
+                url('/hotel/static/src/img/hotel-landing.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    color: var(--text-light);
+    padding: 80px 0;
+}
+
+.hero-content h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.btn-hero {
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--accent-color);
+}
+
+.room-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.room-image {
+    height: 200px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--text-light);
+}
+
+.service-item {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    border-left: 4px solid var(--accent-color);
+}
+
+footer {
+    background-color: var(--secondary-color) !important;
+    color: var(--text-light);
+    padding: 30px 0;
+}
+
+.footer-link {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: var(--text-light);
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+}
+
+.btn-warning {
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    color: var(--text-dark) !important;
+}
+
+.page-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    padding: 4rem 0 2rem;
+    margin-top: 56px;
+}
+
+.reservation-form {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 2rem;
+    margin-top: -2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.section-title::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: var(--accent-color);
+    margin-right: 10px;
+    border-radius: 2px;
+}
+
+.form-control, .form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(60, 42, 33, 0.25);
+}
+
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.equipment-item {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.equipment-item:hover {
+    border-color: var(--accent-color);
+    background: #fff;
+}
+
+.equipment-item.selected {
+    border-color: var(--primary-color);
+    background: rgba(60, 42, 33, 0.05);
+}
+
+.equipment-checkbox {
+    margin-right: 0.5rem;
+}
+
+.room-info {
+    background: rgba(60, 42, 33, 0.05);
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem;
+    border-radius: 0 8px 8px 0;
+    margin-top: 0.5rem;
+}
+
+.price-summary {
+    background: var(--primary-color);
+    color: var(--text-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    margin-bottom:1em;
+}
+
+.btn-reserve {
+    background: var(--accent-color);
+    border: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-reserve:hover {
+    background: #c5be96;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.progress-container {
+    /*background: rgba(255, 255, 255, 0.1);*/
+    padding-top: 10px;
+    /*border-bottom: 1px solid rgba(255, 255, 255, 0.2);*/
+    margin-top: -70px;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgba(229, 229, 203, 0.6);
+    transition: all 0.3s ease;
+}
+
+.step.active {
+    color: var(--accent-color);
+}
+
+.step.completed {
+    color: var(--text-light);
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.step.active .step-number {
+    background: var(--accent-color);
+    color: var(--text-dark);
+    transform: scale(1.1);
+}
+
+.step.completed .step-number {
+    background: var(--text-light);
+    color: var(--primary-color);
+}
+
+.step-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.step-line {
+    flex: 1;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0 1rem;
+    position: relative;
+    top: -10px;
+}
+
+.step-line.completed {
+    background: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .progress-steps {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    .step-label {
+        font-size: 0.8rem;
+    }
+
+    .step-number {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .step-line {
+        margin: 0 0.5rem;
+    }
+}
