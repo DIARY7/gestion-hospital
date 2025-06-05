@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from pickle import FALSE
+
 from odoo import http
 from odoo.http import request
 
@@ -16,16 +18,20 @@ class CustomerController(http.Controller):
 
     @http.route(['/my/hotel'], type='http', auth='user', website=True)
     def hotel_landing(self, **kwargs):
-        return request.render('hotel.landing_page')
+        categories = request.env['hotel.room.category'].search([])
+        return request.render('hotel.landing_page',{
+            'categories': categories
+        })
 
     @http.route(['/book/form'], type='http', auth='user', website=True)
     def hotel_reserve(self, **kwargs):
         rooms = request.env['hotel.room'].search([])
         return request.render('hotel.form_booking',{
-            'rooms': rooms
+            'rooms': rooms,
+            'values':{}
         })
 
-    @http.route(['/book/form/equipments'], type='http', auth='user', website=True ,  methods=['POST'], csrf=True)
+    @http.route(['/book/form/equipments'], type='http', auth='user', website=True ,  methods=['POST'], csrf=False)
     def hotel_reserve_equipment(self, **post):
         user = request.env.user
         Booking = request.env['hotel.room.booking']
@@ -45,10 +51,18 @@ class CustomerController(http.Controller):
         except Exception as e:
             rooms = request.env['hotel.room'].search([])
             error = str(e)
+
+            if 'start_date' in post:
+                post['start_date'] = post['start_date'].split(' ')[0]
+
+            if 'end_date' in post:
+                post['end_date'] = post['end_date'].split(' ')[0]
+
             return request.render('hotel.form_booking', {
                 'rooms': rooms,
+                'values': post,
                 'error': error
-            })
+            },post)
 
         room = request.env['hotel.room'].browse(int(post.get('room_id')))
         all_equipments = request.env['hotel.equipment'].search([])
@@ -59,14 +73,16 @@ class CustomerController(http.Controller):
             'client_id': temp_booking.client_id.id,
             'room_id': temp_booking.room_id.id,
             'nb_person': temp_booking.nb_person,
-            'start_date': temp_booking.start_date,
-            'end_date': temp_booking.end_date,
+            'start_date': temp_booking.start_date.isoformat(),
+            'end_date': temp_booking.end_date.isoformat(),
             'equipment_add_ids': temp_booking.equipment_add_ids.ids,
             'nights': temp_booking.nights,
             'total_price': temp_booking.total_price,
         }
 
         return request.render('hotel.form_booking_equipment',{
+            'nights':temp_booking.nights,
+            'roomTotal':temp_booking.total_price,
             'room_equipments': room_equipments,
             'available_equipments': available_equipments,
         })
@@ -82,5 +98,8 @@ class CustomerController(http.Controller):
         booking = request.env['hotel.room.booking'].create(booking_data)
         request.session.pop('temp_booking', None)
         return request.render('hotel.landing_page')
+
+
+
 
 

@@ -80,15 +80,4 @@ function calculateTotal() {
     document.getElementById('priceSummary').style.display = 'block';
 }
 
-function toggleEquipment(element, equipmentId) {
-    const checkbox = document.getElementById(equipmentId);
-    checkbox.checked = !checkbox.checked;
 
-    if (checkbox.checked) {
-        element.classList.add('selected');
-    } else {
-        element.classList.remove('selected');
-    }
-
-    calculateTotal();
-}

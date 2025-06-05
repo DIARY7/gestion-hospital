@@ -23,51 +23,23 @@
         <section class="mb-5">
             <h2 class="section-title">Nos Chambres</h2>
             <div class="row">
-                <div class="col-md-4">
+                <t t-foreach="categories" t-as="cat">
+                    <div class="col-md-4">
                     <div class="room-card">
                         <div class="room-image">
-                            <span>Chambre Standard</span>
+                            <span><t t-esc="cat.name" /></span>
                         </div>
                         <div class="p-3">
-                            <h4>Chambre Standard</h4>
-                            <p class="text-muted">Confort et élégance pour un séjour parfait.</p>
+                            <h4>Suite <t t-esc="cat.name" /></h4>
+                            <p class="text-muted">Garanti par tout nos clients .</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="h5 mb-0" style="color: var(--primary-color)">€89/nuit</span>
-                                <a href="/my/hotel/book" class="btn btn-primary btn-sm">Réserver</a>
+                                <span class="h5 mb-0" style="color: var(--primary-color)"><t t-esc="cat.base_price" /> Ar/nuit <sub class="fs-6">(sans equipements)</sub></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="room-card">
-                        <div class="room-image">
-                            <span>Suite Deluxe</span>
-                        </div>
-                        <div class="p-3">
-                            <h4>Suite Deluxe</h4>
-                            <p class="text-muted">Espace généreux avec salon séparé.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="h5 mb-0" style="color: var(--primary-color)">€149/nuit</span>
-                                <a href="/my/hotel/book" class="btn btn-primary btn-sm">Réserver</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="room-card">
-                        <div class="room-image">
-                            <span>Suite Présidentielle</span>
-                        </div>
-                        <div class="p-3">
-                            <h4>Suite Présidentielle</h4>
-                            <p class="text-muted">Le summum du luxe avec service personnalisé.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="h5 mb-0" style="color: var(--primary-color)">€299/nuit</span>
-                                <a href="/my/hotel/book" class="btn btn-primary btn-sm">Réserver</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </t>
+
             </div>
         </section>
 
@@ -131,5 +103,6 @@
         </section>
     </main>
     </t>
+
   </template>
 </odoo>

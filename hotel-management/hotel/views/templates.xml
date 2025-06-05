@@ -27,6 +27,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/book/form">Réserver</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/web/session/logout?redirect=/">Deconnecter</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -63,7 +66,7 @@
                 <script>
                   document.getElementById('year').textContent = new Date().getFullYear();
                 </script>
-                <script src="/hotel/static/src/js/booking.js"></script>
+
                 <!-- Bootstrap JS + Popper (optionnel) -->
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
                 <script src="/hotel/static/src/js/bootstrap.min.js"></script>

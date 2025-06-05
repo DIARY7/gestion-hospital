@@ -6,8 +6,8 @@ class RoomCategory(models.Model):
     _name = 'hotel.room.category'
     _description = "The hotel's room categories"
 
-    name = fields.Char(string='Nom',required=True)
-    quality_level = fields.Float(string="Quality level",required=True)
+    name = fields.Char(string='Name',required=True)
+    base_price = fields.Float(string="Base price",required=True)
 
 
 

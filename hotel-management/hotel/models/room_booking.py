@@ -6,14 +6,19 @@ class RoomBooking(models.Model):
     _name = 'hotel.room.booking'
     _description = "Room hotel's occupation"
 
-    client_id = fields.Many2one('res.partner', string='Client',required=True)
-    room_id = fields.Many2one('hotel.room', string='Room',required=True)
+    client_id = fields.Many2one('res.partner', string='Client',index=True,required=True)
+    room_id = fields.Many2one('hotel.room', string='Room',index=True,required=True)
     nb_person = fields.Integer(string='Number of person',required=True)
     start_date = fields.Datetime(string='Start Date',required=True)
     end_date = fields.Datetime(string='End Date',required=True)
     equipment_add_ids = fields.Many2many('hotel.equipment', string='Equipments additional') # Equipment add plus add
     nights = fields.Integer(string='Number of night',required=True,readonly=True)
+    state = fields.Selection([
+        ('confirm'),
+        ('cancel')
+    ],)
     total_price = fields.Float(string='Total Price',readonly=True,compute='_compute_total_price',store = True) # Total night
+
 
     @api.depends('room_id','equipment_add_ids','start_date','end_date')
     def _compute_total_price(self):

@@ -33,7 +33,7 @@
 
         <!-- Reservation Form -->
         <div class="container">
-            <div t-if="error" class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+            <div t-if="error" style="z-index:12" class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
                 <i class="fa fa-exclamation-circle me-2"></i>
                 <span t-esc="error"/>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -49,25 +49,25 @@
                                     <label for="roomNumber" class="form-label">Numéro de chambre *</label>
                                     <select class="form-select" id="roomNumber"  required = "required" onchange="updateRoomInfo()" name="room_id">
                                         <t t-foreach="rooms" t-as="room">
-                                            <option t-att-value="room.id" t-att-data-type="room.room_category_id.name" t-att-data-price="room.total_price"><t t-esc="room.name+' - '+ room.room_category_id.name" /> </option>
+                                            <option t-att-value="room.id" t-att-data-type="room.room_category_id.name" t-att-data-price="room.total_price" t-att-selected="values.get('room_id') == str(room.id)" ><t t-esc="room.name+' - '+ room.room_category_id.name" /> </option>
                                         </t>
                                     </select>
                                     <div id="roomInfo" class="room-info" style="display: none;">
                                         <strong>Type:</strong> <span id="roomType"></span><br/>
-                                        <strong>Prix:</strong> <span id="roomPrice"></span>€/nuit
+                                        <strong>Prix:</strong> <span id="roomPrice"></span>Ar/nuit
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="guests" class="form-label">Nombre de personnes *</label>
-                                    <input type="number" class="form-control" id="guests" required = "required" name="nb_person" />
+                                    <input type="number" class="form-control" id="guests" required = "required" name="nb_person" t-att-value="values.get('nb_person')" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="checkIn" class="form-label">Date d'arrivée *</label>
-                                    <input type="date" class="form-control" id="checkIn" required = "required" onchange="calculateTotal()" name="start_date"  />
+                                    <input type="date" class="form-control" id="checkIn" required = "required" onchange="calculateTotal()" name="start_date" t-att-value="values.get('start_date')" />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="checkOut" class="form-label">Date de départ *</label>
-                                    <input type="date" class="form-control" id="checkOut" required = "required" onchange="calculateTotal()" name="end_date" />
+                                    <input type="date" class="form-control" id="checkOut" required = "required" onchange="calculateTotal()" name="end_date" t-att-value="values.get('end_date')" />
                                 </div>
                             </div>
                         </div>
@@ -98,6 +98,7 @@
             </div>
         </div>
     </t>
+      <script src="/hotel/static/src/js/booking.js"></script>
   </template>
 
     <template id="form_booking_equipment" name="Booking Page">
@@ -108,11 +109,11 @@
             <div class="progress-container">
                 <div class="container">
                     <div class="progress-steps">
-                        <div class="step active" data-step="1">
+                        <div class="step" data-step="1">
                             <div class="step-number">1</div>
                         </div>
-                        <div class="step-line active"></div>
-                        <div class="step" data-step="2">
+                        <div class="step-line"></div>
+                        <div class="step active" data-step="2">
                             <div class="step-number">2</div>
                         </div>
                         <div class="step-line"></div>
@@ -132,16 +133,34 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
+
+
                     <form class="reservation-form" id="reservationForm">
+                        <!-- Équipements par defauts -->
+                        <div class="row" style="  justify-content: space-around; gap: 2; margin-bottom: 28px; ">
+                            <h3 class="section-title">Équipements Integrés</h3>
+                                <div t-if="len(available_equipments)==0 "> Aucun equipement par defaut pour ce chambre </div>
+                                <t t-foreach="room_equipments" t-as="equip_av" >
+                                    <div class="equipment-grid">
+                                        <div>
+                                            <span t-att-for="'equip_'+equip_av.name">
+                                                <strong><span class="random-emoji"></span> <t t-esc="equip_av.name" /> </strong><br/>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </t>
+                        </div>
+
                         <!-- Équipements disponibles -->
                         <div class="form-section">
-                            <h3 class="section-title">Équipements supplémentaires</h3>
+                            <h3 class="section-title">Équipements supplémentaires ? </h3>
                             <div t-if="len(available_equipments)==0 "> Aucun equipement supplementaire disponible pour l'instant </div>
                             <t t-foreach="available_equipments" t-as="equip_av" >
-                                <div class="equipment-grid">
-                                    <div class="equipment-item" t-attrs-onclick="toggleEquipment(this, '{{equip_av.name}}')">
-                                        <input type="checkbox" class="equipment-checkbox" t-att-id="'equip_'+equip_av.name" name="equipment" value="equip_av.id" />
-                                        <label t-att-for="'equip_'+equip_av.name">
+                                <div class="equipment-grid" t-attrs-onclick="toggleEquipment(this, '{{equip_av.name}}')">
+                                    <div class="equipment-item" >
+                                        <input type="checkbox"  class="equipment-checkbox form-check-input" t-att-id="equip_av.name" name="equipment" t-att-value="equip_av.id" t-att-data-price="equip_av.price" />
+                                        <label t-att-for="equip_av.name">
                                             <strong><span class="random-emoji"></span> <t t-esc="equip_av.name" /> </strong><br/>
 <!--                                            <small class="text-muted">Connexion haut débit - Gratuit</small>-->
                                         </label>
@@ -153,11 +172,11 @@
                         </div>
 
                         <!-- Résumé des prix -->
-                        <div class="price-summary" id="priceSummary" style="display: none;">
+                        <div class="price-summary" id="priceSummary">
                             <h4>Résumé de la réservation</h4>
                             <div class="d-flex justify-content-between">
-                                <span>Chambre (<span id="nightsCount">0</span> nuit(s)):</span>
-                                <span><span id="roomTotal">0</span>€</span>
+                                <span>Chambre (<span id="nightsCount"><t t-esc="nights"/></span> nuit(s)):</span>
+                                <span><span id="roomTotal"><t t-esc="roomTotal"/></span>Ar</span>
                             </div>
                             <div id="equipmentSummary"></div>
                             <hr/>
@@ -177,8 +196,15 @@
                 </div>
             </div>
         </div>
+        <div id="booking-data"
+             t-att-data-nights="nights"
+             t-att-data-roomTotal="roomTotal"
+             >
+        </div>
     </t>
+        <script src="/hotel/static/src/js/booking_equipment.js"></script>
         <script>
+
             function getRandomEmoji() {
                 const emojis = [
                     "🏔️", "🌋", "🏕️", "🏖️", "🏜️",
@@ -195,5 +221,65 @@
             });
         </script>
   </template>
+
+    <template id="list_booking_equipment" name="Booking List">
+        <div id="reservationsList">
+            <div class="reservation-card confirmed" data-status="confirmed">
+                <div class="reservation-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-1">Réservation #RES001</h5>
+                            <small class="text-muted">Réservée le 15 janvier 2025</small>
+                        </div>
+                        <span class="status-badge status-confirmed">Confirmée</span>
+                    </div>
+                </div>
+                <div class="reservation-body">
+                    <div class="reservation-info">
+                        <div class="info-item">
+                            <div class="info-icon">🏨</div>
+                            <div class="info-content">
+                                <h6>Chambre</h6>
+                                <p>Suite 201 - Deluxe</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📅</div>
+                            <div class="info-content">
+                                <h6>Dates</h6>
+                                <p>25 Jan - 28 Jan 2025</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">👥</div>
+                            <div class="info-content">
+                                <h6>Personnes</h6>
+                                <p>2 adultes</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">💰</div>
+                            <div class="info-content">
+                                <h6>Total</h6>
+                                <p>497€</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reservation-actions">
+                        <button class="btn btn-outline-primary btn-sm" onclick="toggleDetails('details1')">
+                            📋 Voir détails
+                        </button>
+                        <button class="btn btn-warning btn-sm">
+                            ✏️ Modifier
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm" onclick="cancelReservation('RES001')">
+                            ❌ Annuler
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
 
 </odoo>
