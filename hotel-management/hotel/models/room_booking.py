@@ -60,9 +60,10 @@ class RoomBooking(models.Model):
                     ('id', '!=', booking.id),  # Exclure la réservation actuelle
                     ('start_date', '<', booking.end_date),
                     ('end_date', '>', booking.start_date),
+                    ('state','=','confirmed')
                 ])
 
-                if overlapping_bookings:
+                if overlapping_bookings: # Raha misy
                     raise UserError(
                         "La chambre est déjà réservée du %s au %s" % (
                             overlapping_bookings[0].start_date,
