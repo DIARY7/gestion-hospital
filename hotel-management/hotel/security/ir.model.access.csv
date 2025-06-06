@@ -6,5 +6,5 @@ access_hotel_room_portal,access.hotel.room.portal,model_hotel_room,base.group_po
 access_hotel_equipment_user,access.hotel.equipment.user,model_hotel_equipment,base.group_user,1,1,1,1
 access_hotel_equipment_portal,access.hotel.equipment.portal,model_hotel_equipment,base.group_portal,1,0,0,0
 access_hotel_booking_user,access.hotel.booking.user,model_hotel_room_booking,base.group_user,1,1,1,1
-access_hotel_booking_portal,access.hotel.booking.portal,model_hotel_room_booking,base.group_portal,1,1,0,0
+access_hotel_booking_portal,access.hotel.booking.portal,model_hotel_room_booking,base.group_portal,1,1,1,0
 

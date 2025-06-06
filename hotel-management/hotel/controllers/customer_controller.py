@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from pickle import FALSE
 
 from odoo import http
@@ -29,6 +30,16 @@ class CustomerController(http.Controller):
         return request.render('hotel.form_booking',{
             'rooms': rooms,
             'values':{}
+        })
+
+    @http.route(['/my/book'], type='http', auth='user', website=True)
+    def hotel_list_booking(self, **kwargs):
+        room_bookings = request.env['hotel.room.booking'].search([
+            ('id', '=' ,request.env.user.id)
+        ])
+        return request.render('hotel.list_booking_equipment', {
+            'bookings': room_bookings,
+
         })
 
     @http.route(['/book/form/equipments'], type='http', auth='user', website=True ,  methods=['POST'], csrf=False)
@@ -87,17 +98,31 @@ class CustomerController(http.Controller):
             'available_equipments': available_equipments,
         })
 
-    @http.route(['/booking'], type='http', auth='user', website=True)
-    def apply_reserve(self, **kwargs):
-        booking_data = request.session.get('temp_booking')
-        if not booking_data:
-            return request.redirect('/book/form')
-        # C'est ici aussi qu'on ajoute les equipments
+    @http.route(['/booking'], type='http', auth='user', website=True,csrf=False)
+    def apply_reserve(self, **post):
+        temp_booking = request.session.get('temp_booking')
 
+        equipment_ids = post.get('equipment', '').split(',') if post.get('equipment') else []
+        equipment_ids = [int(id) for id in equipment_ids if id.isdigit()]  # Filtrage et conversion
+
+        if not temp_booking:
+            return request.redirect('/book/form')
+
+        # Convertit les données pour utilisation
+        booking_data = {
+            'client_id': int(temp_booking['client_id']),
+            'room_id': int(temp_booking['room_id']),
+            'nb_person': int(temp_booking['nb_person']),
+            'start_date': datetime.fromisoformat(temp_booking['start_date']),
+            'end_date': datetime.fromisoformat(temp_booking['end_date']),
+            'equipment_add_ids': [(6, 0, equipment_ids)],
+            'nights': int(temp_booking['nights']),
+            'total_price': float(temp_booking['total_price']),
+        }
         # Création réelle de la réservation
         booking = request.env['hotel.room.booking'].create(booking_data)
         request.session.pop('temp_booking', None)
-        return request.render('hotel.landing_page')
+        return request.render('hotel.form_booking_final')
 
 
 
