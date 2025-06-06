@@ -124,6 +124,15 @@ class CustomerController(http.Controller):
         request.session.pop('temp_booking', None)
         return request.render('hotel.form_booking_final')
 
+    @http.route(['/my/book/cancel'], type='http', auth='user', website=True,csrf=False)
+    def cancel_booking(self,**args):
+        id_reservation = args.get('id_reservation')
+        booking = request.env['hotel.room.booking'].browse(int(id_reservation))
+        booking.write({
+            'state': 'cancelled'  # Utilisez la valeur exacte définie dans votre Selection
+        })
+        return request.redirect('/my/book')
+
 
 
 
