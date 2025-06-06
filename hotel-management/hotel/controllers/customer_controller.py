@@ -35,7 +35,7 @@ class CustomerController(http.Controller):
     @http.route(['/my/book'], type='http', auth='user', website=True)
     def hotel_list_booking(self, **kwargs):
         room_bookings = request.env['hotel.room.booking'].search([
-            ('id', '=' ,request.env.user.id)
+            ('client_id', '=' ,request.env.user.id)
         ])
         return request.render('hotel.list_booking_equipment', {
             'bookings': room_bookings,

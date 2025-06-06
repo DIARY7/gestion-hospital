@@ -14,9 +14,9 @@ class RoomBooking(models.Model):
     equipment_add_ids = fields.Many2many('hotel.equipment', string='Equipments additional') # Equipment add plus add
     nights = fields.Integer(string='Number of night',required=True,readonly=True)
     state = fields.Selection([
-        ('Confirm','confirm'),
-        ('Cancel','cancel')
-    ],)
+        ('confirmed','Confirm'),
+        ('cancelled','Cancel')
+    ],default='confirmed',required=True)
 
     total_equipment_ids = fields.Many2many('hotel.equipment', string='Total Equipments',readonly=True,store=False,compute='_compute_total_equipment')
     total_price = fields.Float(string='Total Price',readonly=True,compute='_compute_total_price',store = True) # Total night
