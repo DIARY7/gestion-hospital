@@ -14,9 +14,11 @@ class RoomBooking(models.Model):
     equipment_add_ids = fields.Many2many('hotel.equipment', string='Equipments additional') # Equipment add plus add
     nights = fields.Integer(string='Number of night',required=True,readonly=True)
     state = fields.Selection([
-        ('confirm'),
-        ('cancel')
+        ('Confirm','confirm'),
+        ('Cancel','cancel')
     ],)
+
+    total_equipment_ids = fields.Many2many('hotel.equipment', string='Total Equipments',readonly=True,store=False,compute='_compute_total_equipment')
     total_price = fields.Float(string='Total Price',readonly=True,compute='_compute_total_price',store = True) # Total night
 
 
@@ -24,6 +26,13 @@ class RoomBooking(models.Model):
     def _compute_total_price(self):
         for booking in self:
             booking.total_price = (booking.room_id.total_price + sum(booking.equipment_add_ids.mapped('price')))*booking.nights
+
+    @api.depends('room_id.equipment_ids', 'equipment_add_ids')
+    def _compute_total_equipment(self):
+        for booking in self:
+            # Union the 2 equipments lists and remove 'doublons'
+            booking.total_equipment_ids = booking.room_id.equipment_ids | booking.equipment_add_ids
+
 
     @api.constrains('start_date', 'end_date')
     def _check_dates(self):

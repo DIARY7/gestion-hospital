@@ -22,7 +22,7 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/my/hotel/reservations">Mes Réservations</a>
+                                    <a class="nav-link" href="/my/book">Mes Réservations</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/book/form">Réserver</a>
@@ -46,10 +46,10 @@
                                 <p>Votre destination pour un séjour confortable.</p>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h6>Liens Rapides</h6>
+                                <h6>Presidents de l'hotel</h6>
                                 <div class="d-flex flex-column">
-                                    <a href="/my/hotel/reservations" class="footer-link">Mes Réservations</a>
-                                    <a href="/my/hotel/book" class="footer-link">Réserver</a>
+                                    <a class="footer-link">Mr Sandratra</a>
+                                    <a class="footer-link">Mr Brice</a>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
