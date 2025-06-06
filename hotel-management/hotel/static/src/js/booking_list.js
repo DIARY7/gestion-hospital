@@ -52,7 +52,6 @@ function cancelReservation(reservationId) {
     if (confirm('Êtes-vous sûr de vouloir annuler cette réservation ?')) {
         // Here you would normally send a request to your server
         alert(`Réservation ${reservationId} annulée avec succès. Vous recevrez un email de confirmation.`);
-
         // For demo purposes, you could update the UI here
         // location.reload();
     }

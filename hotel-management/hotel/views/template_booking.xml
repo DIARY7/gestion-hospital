@@ -290,7 +290,7 @@
                                             <h5 class="mb-1">Réservation N° #<t t-esc="reservation.id" /></h5>
                                             <small class="text-muted">Réservée le <t t-esc="reservation.start_date.strftime('%d %B %Y')" /></small>
                                         </div>
-                                        <span class="status-badge status-confirmed"><t t-esc="reservation.state" /></span>
+                                        <span t-attf-class="status-badge status-{{ reservation.state }}"><t t-esc="reservation.state" /></span>
                                     </div>
                                 </div>
                                 <div class="reservation-body">
@@ -330,9 +330,14 @@
                                             📋 Voir détails
                                         </button>
 
-                                        <button class="btn btn-outline-danger btn-sm" onclick="cancelReservation('RES001')">
-                                            ❌ Annuler
-                                        </button>
+                                        <t t-if="reservation.state=='confirmed' " >
+                                            <a t-attf-href="/my/book/cancel?id_reservation={{ reservation.id }}">
+                                                <button class="btn btn-outline-danger btn-sm" >
+                                                    ❌ Annuler
+                                                </button>
+                                            </a>
+                                        </t>
+
                                     </div>
                                     <div t-attf-id="details{{ reservation.id }}" class="details-section">
                                         <h6>Détails de la réservation</h6>
