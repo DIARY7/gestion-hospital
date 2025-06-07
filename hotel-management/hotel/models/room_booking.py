@@ -158,7 +158,12 @@ class RoomBooking(models.Model):
             rooms_available = all_rooms - rooms_reserved
             return {
                 'status': 'success',
-                'rooms_available':rooms_available,
+                'rooms':[{
+                    'id': room.id,
+                    'name': room.name,
+                    'price': room.total_price,
+                    'capacity': room.max_capacity
+                } for room in rooms_available],
             }
 
         except Exception as e:

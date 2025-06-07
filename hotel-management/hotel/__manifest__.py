@@ -20,6 +20,7 @@ Long description of module's purpose
         'data/customer_demo_data.xml',
         'data/equipment_data.xml',
         'data/room_category_data.xml',
+        'data/room_demo_data.xml',
         'views/equipment_views.xml',
         'views/room_category_views.xml',
         'views/room_views.xml',
