@@ -18,7 +18,6 @@
             <field name="max_capacity">2</field>
             <field name="equipment_ids" eval="[(6, 0, [
                 ref('equipment_tv_4k'),
-                ref('equipment_wifi_router'),
                 ref('equipment_safe')
             ])]"/>
         </record>
@@ -28,7 +27,6 @@
             <field name="room_category_id" ref="room_category_standard"/>
             <field name="max_capacity">3</field>
             <field name="equipment_ids" eval="[(6, 0, [
-                ref('equipment_tv_4k'),
                 ref('equipment_wifi_router'),
                 ref('equipment_minibar')
             ])]"/>
@@ -42,7 +40,6 @@
             <field name="equipment_ids" eval="[(6, 0, [
                 ref('equipment_tv_4k'),
                 ref('equipment_wifi_router'),
-                ref('equipment_minibar'),
                 ref('equipment_safe')
             ])]"/>
         </record>
@@ -54,7 +51,6 @@
             <field name="equipment_ids" eval="[(6, 0, [
                 ref('equipment_tv_4k'),
                 ref('equipment_wifi_router'),
-                ref('equipment_minibar'),
                 ref('equipment_air_conditioner')
             ])]"/>
         </record>

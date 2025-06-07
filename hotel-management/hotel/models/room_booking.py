@@ -171,3 +171,28 @@ class RoomBooking(models.Model):
                 'status' : 'error',
                 'message': str(e)
             }
+
+    @api.model
+    def expose_cancel_reservation(self,vals):
+
+        if vals['id_reservation'] is None:
+            return {
+                'status': 'error',
+                'message': 'L \'id_reservation est un champ obligatoire'
+            }
+        try:
+            id_reservation = int(vals['id_reservation'])
+            booking = self.browse(int(id_reservation))
+            booking.write({
+                'state': 'cancelled'  # Utilisez la valeur exacte définie dans votre Selection
+            })
+            return {
+                'status' :'success',
+                'message': f'Chambre { booking.room_id.name } libéré'
+            }
+        except Exception as e:
+            return {
+                'status': 'error',
+                'message': str(e)
+            }
+
