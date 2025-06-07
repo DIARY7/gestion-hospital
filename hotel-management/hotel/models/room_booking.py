@@ -91,3 +91,108 @@ class RoomBooking(models.Model):
         self._check_dates()
         self._check_room_capacity()
         self._check_room_availability()
+
+    # Method JSON-RPC
+    @api.model
+    def expose_create_booking(self, vals):
+        try:
+            # Data validation
+            required_fields = ['client_id', 'room_id', 'nb_person', 'start_date', 'end_date']
+            for field in required_fields:
+                if field not in vals:
+                    return {
+                        'status': 'error',
+                        'message': f'Le champ {field} est obligatoire'
+                    }
+
+            # Date convertion
+            vals['start_date'] = fields.Datetime.to_datetime(vals['start_date'])
+            vals['end_date'] = fields.Datetime.to_datetime(vals['end_date'])
+
+            # Re compute night
+            if 'start_date' in vals and 'end_date' in vals:
+                start_date = fields.Datetime.to_datetime(vals['start_date'])
+                end_date = fields.Datetime.to_datetime(vals['end_date'])
+                vals['nights'] = (end_date.date() - start_date.date()).days
+
+            booking = self.create(vals)
+
+
+            return {
+                'status': 'success',
+                'booking_id': booking.id,
+                'total_price': booking.total_price,
+                'nights': booking.nights
+            }
+
+        except Exception as e:
+            return {
+                'status': 'error',
+                'message': str(e)
+            }
+
+    @api.model
+    def expose_free_booking(self, vals):
+
+        if "start_date" not in vals or "end_date" not in vals:
+            return {
+                'status': 'error',
+                'message': f'Le champ "start_date" et "end_date" sont obligatoires'
+            }
+        try:
+            vals['start_date'] = fields.Datetime.to_datetime(vals['start_date'])
+            vals['end_date'] = fields.Datetime.to_datetime(vals['end_date'])
+
+            if vals["end_date"] < vals["start_date"]:
+                return {
+                    'status': 'error',
+                    'message': f'Le champs end_date doit être postérieur au champ start_date'
+                }
+            rooms_reserved = self.search([
+                ('start_date', '<', vals['end_date']),
+                ('end_date','>',vals['start_date']),
+                ('state', '=', 'confirmed')
+            ]).mapped("room_id")
+
+            all_rooms = self.env['hotel.room'].search([])
+            rooms_available = all_rooms - rooms_reserved
+            return {
+                'status': 'success',
+                'rooms':[{
+                    'id': room.id,
+                    'name': room.name,
+                    'price': room.total_price,
+                    'capacity': room.max_capacity
+                } for room in rooms_available],
+            }
+
+        except Exception as e:
+            return {
+                'status' : 'error',
+                'message': str(e)
+            }
+
+    @api.model
+    def expose_cancel_reservation(self,vals):
+
+        if vals['id_reservation'] is None:
+            return {
+                'status': 'error',
+                'message': 'L \'id_reservation est un champ obligatoire'
+            }
+        try:
+            id_reservation = int(vals['id_reservation'])
+            booking = self.browse(int(id_reservation))
+            booking.write({
+                'state': 'cancelled'  # Utilisez la valeur exacte définie dans votre Selection
+            })
+            return {
+                'status' :'success',
+                'message': f'Chambre { booking.room_id.name } libéré'
+            }
+        except Exception as e:
+            return {
+                'status': 'error',
+                'message': str(e)
+            }
+
