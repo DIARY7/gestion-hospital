@@ -143,7 +143,7 @@ class RoomBooking(models.Model):
             vals['start_date'] = fields.Datetime.to_datetime(vals['start_date'])
             vals['end_date'] = fields.Datetime.to_datetime(vals['end_date'])
 
-            if vals["end_date"] <= vals["end_date"]:
+            if vals["end_date"] < vals["start_date"]:
                 return {
                     'status': 'error',
                     'message': f'Le champs end_date doit être postérieur au champ start_date'
